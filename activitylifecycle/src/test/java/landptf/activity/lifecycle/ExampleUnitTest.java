@@ -1,4 +1,4 @@
-package landptf.blogdemo;
+package landptf.activity.lifecycle;
 
 import org.junit.Test;
 
