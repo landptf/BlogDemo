@@ -1,4 +1,4 @@
-package landptf.activity.lifecycle;
+package com.landptf.blog;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
