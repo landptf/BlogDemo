@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.landptf.blog.activitylifecycle.ActivityA;
+import com.landptf.blog.audiofocus.MediaActivity;
 import com.landptf.view.ButtonM;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +25,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MainActivity.this, ActivityA.class));
+                }
+            });
+        }
+
+        ButtonM btmAudioFocus = (ButtonM) findViewById(R.id.btm_audio_focus);
+        if(btmAudioFocus != null){
+            btmAudioFocus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, MediaActivity.class));
                 }
             });
         }

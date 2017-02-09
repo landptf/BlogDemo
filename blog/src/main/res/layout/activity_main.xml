@@ -29,6 +29,20 @@
             landptf:radius="30"
             landptf:textColor="@android:color/white" />
 
+        <com.landptf.view.ButtonM
+            android:id="@+id/btm_audio_focus"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="音频焦点"
+            landptf:backColor="@color/colorPrimary"
+            landptf:backColorPress="@color/colorPrimaryDark"
+            landptf:fillet="true"
+            landptf:radius="30"
+            landptf:textColor="@android:color/white" />
+
     </LinearLayout>
 
 </LinearLayout>
