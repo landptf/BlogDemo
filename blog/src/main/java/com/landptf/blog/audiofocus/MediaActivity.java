@@ -40,7 +40,7 @@ public class MediaActivity extends AppCompatActivity {
         //初始化AudioManager对象
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         //申请焦点
-        mAudioManager.requestAudioFocus(mAudioFocusChange, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+        mAudioManager.requestAudioFocus(mAudioFocusChange, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
         AssetFileDescriptor fileDescriptor;
         try {
             //获取音频文件
