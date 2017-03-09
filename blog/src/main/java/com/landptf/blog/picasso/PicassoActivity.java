@@ -1,11 +1,14 @@
 package com.landptf.blog.picasso;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.landptf.blog.R;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Request;
 
 public class PicassoActivity extends AppCompatActivity {
     private static final String imageUrl = "http://upload-images.jianshu.io/upload_images/589909-e339eb2763fa172c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
@@ -22,7 +25,7 @@ public class PicassoActivity extends AppCompatActivity {
         //设置图片来源指示图标
         //Picasso.with(this).setIndicatorsEnabled(true);
         //从网络加载
-        Picasso.with(this).load(imageUrl).into(imageView);
+        //Picasso.with(this).load(imageUrl).into(imageView);
 
         //从res中加载
         //Picasso.with(this).load(R.mipmap.default_image).into(imageView);
@@ -75,5 +78,6 @@ public class PicassoActivity extends AppCompatActivity {
 
         //手动指定key值
         //Picasso.with(this).load(imageUrl).stableKey("landptf").into(imageView);
+
     }
 }

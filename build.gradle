@@ -16,7 +16,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url  "https://yulong.bintray.com/maven" }
+        maven { url "https://dl.bintray.com/landptf2/landptf" }
         maven { url "https://jitpack.io" }
     }
 }
