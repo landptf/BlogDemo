@@ -3,15 +3,22 @@ package com.landptf.blog.picasso;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.landptf.blog.R;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
 
+import java.io.IOException;
+
 public class PicassoActivity extends AppCompatActivity {
     private static final String imageUrl = "http://upload-images.jianshu.io/upload_images/589909-e339eb2763fa172c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    private ImageView imageView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +28,11 @@ public class PicassoActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         //设置图片来源指示图标
-        //Picasso.with(this).setIndicatorsEnabled(true);
+        Picasso.with(this).setIndicatorsEnabled(true);
         //从网络加载
-        //Picasso.with(this).load(imageUrl).into(imageView);
+        Picasso.with(this).load(imageUrl).into(imageView);
 
         //从res中加载
         //Picasso.with(this).load(R.mipmap.default_image).into(imageView);
@@ -79,5 +86,44 @@ public class PicassoActivity extends AppCompatActivity {
         //手动指定key值
         //Picasso.with(this).load(imageUrl).stableKey("landptf").into(imageView);
 
+        //同步加载图片
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Bitmap bitmap = Picasso.with(PicassoActivity.this).load(imageUrl).get();
+//                    handler.obtainMessage(0, bitmap).sendToTarget();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+
+        //异步加载图片
+        //Picasso.with(PicassoActivity.this).load(imageUrl).fetch();
+
+//        Picasso.with(PicassoActivity.this).load(imageUrl).fetch(new Callback() {
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onError() {
+//
+//            }
+//        });
     }
+
+//    private Handler handler = new Handler(){
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            switch (msg.what){
+//                case 0:
+//                    imageView.setImageBitmap((Bitmap) msg.obj);
+//                    break;
+//            }
+//        }
+//    };
 }

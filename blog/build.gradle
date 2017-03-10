@@ -32,5 +32,6 @@ dependencies {
     compile 'com.landptf:landptf:1.0.1'
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.8.1'
 }
