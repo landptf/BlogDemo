@@ -1,16 +1,18 @@
 package com.landptf.blog;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
-import com.landptf.blog.activitylifecycle.ActivityA;
-import com.landptf.blog.audiofocus.MediaActivity;
-import com.landptf.blog.picasso.PicassoActivity;
-import com.landptf.view.ButtonM;
+import com.landptf.blog.splash.SplashFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    private FragmentManager frManager;
+    private SplashFragment fmSplash;
+    private MainFragment fmMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,34 +22,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        ButtonM btmActivityLifeCycle = (ButtonM) findViewById(R.id.btm_activity_life_cycle);
-        if (btmActivityLifeCycle != null) {
-            btmActivityLifeCycle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, ActivityA.class));
-                }
-            });
-        }
+        frManager = getSupportFragmentManager();
+        fmSplash = (SplashFragment) frManager.findFragmentById(R.id.fm_splash);
+        fmMain = (MainFragment) frManager.findFragmentById(R.id.fm_main);
+        showSplash();
+    }
 
-        ButtonM btmAudioFocus = (ButtonM) findViewById(R.id.btm_audio_focus);
-        if(btmAudioFocus != null){
-            btmAudioFocus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, MediaActivity.class));
-                }
-            });
-        }
+    private void showSplash(){
+        frManager.beginTransaction().hide(fmMain).show(fmSplash).commit();
+    }
 
-        ButtonM btmPicasso = (ButtonM) findViewById(R.id.btm_picasso);
-        if(btmPicasso != null){
-            btmPicasso.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, PicassoActivity.class));
-                }
-            });
-        }
+    public void dismissSplash(){
+        frManager.beginTransaction().hide(fmSplash).show(fmMain).commit();
     }
 }

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Blog</string>
+
+    <string name="logo">Landptf Blog</string>
+    <string name="click_to_skip">点击跳过</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

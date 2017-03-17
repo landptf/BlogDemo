@@ -14,10 +14,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
-        //for landptf
-        maven { url "https://dl.bintray.com/landptf2/landptf" }
-
         //for BaseRecyclerViewAdapterHelper
         maven { url "https://jitpack.io" }
     }
