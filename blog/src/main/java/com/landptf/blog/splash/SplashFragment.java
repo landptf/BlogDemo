@@ -1,5 +1,6 @@
 package com.landptf.blog.splash;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,12 @@ import com.landptf.blog.MainActivity;
 import com.landptf.blog.R;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
+/**
+ * Created by landptf on 2017/03/18.
+ * 启动页，集成了腾讯广告联盟的开屏广告
+ */
 public class SplashFragment extends Fragment {
     private static final String TAG = SplashFragment.class.getSimpleName();
 
@@ -48,9 +54,35 @@ public class SplashFragment extends Fragment {
         container = (ViewGroup) activity.findViewById(R.id.fl_splash_container);
         tvSkip = (TextView) activity.findViewById(R.id.tv_skip);
         ivSplashHolder = (ImageView) activity.findViewById(R.id.iv_splash_holder);
-        new SplashAD(activity, container, tvSkip, Constants.APPID, Constants.SplashPosID, adListener, 3000);
+        //申请动态权限
+        ApplyPermissions();
     }
 
+    /**
+     * 动态申请集成腾讯广告联盟的开屏广告所需要的三个权限
+     * 使用了RxPermissions开源框架
+     */
+    private void ApplyPermissions() {
+        RxPermissions rxPermissions = new RxPermissions(activity);
+        rxPermissions
+                .request(Manifest.permission.READ_PHONE_STATE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        //获取开屏广告
+                        new SplashAD(activity, container, tvSkip, Constants.APPID, Constants.SplashPosID, adListener, 5000);
+                    } else {
+                        //直接进入主页面
+                        activity.dismissSplash();
+                    }
+                });
+
+    }
+
+    /**
+     * 开屏广告状态的监听
+     */
     private SplashADListener adListener = new SplashADListener() {
 
         /**
@@ -67,11 +99,7 @@ public class SplashFragment extends Fragment {
          */
         @Override
         public void onNoAD(int i) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Log.e(TAG, "error code = " + i);
             activity.dismissSplash();
         }
 
@@ -80,7 +108,7 @@ public class SplashFragment extends Fragment {
          */
         @Override
         public void onADPresent() {
-            ivSplashHolder.setVisibility(View.INVISIBLE);
+            ivSplashHolder.setVisibility(View.GONE);
         }
 
         /**

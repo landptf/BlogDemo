@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.landptf.blog.splash.SplashFragment;
 
+/**
+ * Created by landptf on 2017/03/18.
+ * 主页面，包含了SplashFragment和MainFragment
+ */
 public class MainActivity extends AppCompatActivity {
 
     private FragmentManager frManager;
@@ -33,6 +37,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void dismissSplash(){
-        frManager.beginTransaction().hide(fmSplash).show(fmMain).commit();
+        frManager.beginTransaction().hide(fmSplash).show(fmMain).commitAllowingStateLoss();
     }
 }

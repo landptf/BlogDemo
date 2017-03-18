@@ -25,7 +25,7 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:background="@drawable/background_circle"
         android:gravity="center"

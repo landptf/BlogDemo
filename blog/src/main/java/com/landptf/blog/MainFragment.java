@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.landptf.blog.picasso.PicassoActivity;
 import com.landptf.view.ButtonM;
 
 public class MainFragment extends Fragment {
+    private static final String TAG = MainFragment.class.getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,25 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView(getActivity());
+        testThread();
+    }
+
+    /**
+     * 模拟后台耗时操作
+     */
+    private void testThread(){
+        new Thread(() -> {
+            int i = 0;
+            while (i < 5) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.e(TAG, "--- " + i + " ---");
+                i++;
+            }
+        }).start();
     }
 
     private void initView(final FragmentActivity activity) {
@@ -42,32 +63,17 @@ public class MainFragment extends Fragment {
 
         ButtonM btmActivityLifeCycle = (ButtonM) activity.findViewById(R.id.btm_activity_life_cycle);
         if (btmActivityLifeCycle != null) {
-            btmActivityLifeCycle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(activity, ActivityA.class));
-                }
-            });
+            btmActivityLifeCycle.setOnClickListener(v -> startActivity(new Intent(activity, ActivityA.class)));
         }
 
         ButtonM btmAudioFocus = (ButtonM) activity.findViewById(R.id.btm_audio_focus);
         if(btmAudioFocus != null){
-            btmAudioFocus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(activity, MediaActivity.class));
-                }
-            });
+            btmAudioFocus.setOnClickListener(v -> startActivity(new Intent(activity, MediaActivity.class)));
         }
 
         ButtonM btmPicasso = (ButtonM) activity.findViewById(R.id.btm_picasso);
         if(btmPicasso != null){
-            btmPicasso.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(activity, PicassoActivity.class));
-                }
-            });
+            btmPicasso.setOnClickListener(v -> startActivity(new Intent(activity, PicassoActivity.class)));
         }
     }
 }
